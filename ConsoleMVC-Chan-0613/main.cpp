@@ -1,3 +1,7 @@
+#define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
+#include <Windows.h>
+
 #include <iostream>
 #include <limits>
 
@@ -178,6 +182,11 @@ namespace
 
 int main()
 {
+    // 소스가 UTF-8(/utf-8 컴파일 옵션)로 컴파일되므로, 콘솔 입출력 코드페이지도
+    // UTF-8(65001)로 맞춰야 한글이 깨지지 않는다.
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+
     // Repository 구현체 선택 지점: 최종 프로젝트에서는 이 두 줄만
     // DataPersistence PoC의 JsonSampleRepository / JsonOrderRepository로 교체하면 된다.
     Model::InMemorySampleRepository sampleRepository;
